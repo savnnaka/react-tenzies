@@ -39,14 +39,19 @@ function App() {
       <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={() => holdDice(die.id)}/>
     )})
 
+  const [rolls, setRolls] = React.useState(0)
+
   const rollDice = () => {
     if(tenzies){
+      // restart game
+      setRolls(0)
       setTenzies(false)
       setDice(allNewDice())
     } else {
       setDice(prevDice => prevDice.map(die => {
         return die.isHeld ? die : generateNewDie()
       }))
+      setRolls(prev => prev +1)
     }
   }
 
@@ -78,6 +83,7 @@ function App() {
           {diceElements}
         </div>
         <button className="roll-button" onClick={rollDice}> {tenzies ? "New Game" : "Roll"}</button>
+        <p>Rolls so far: {rolls}</p>
       </main>
     </div>
   );
