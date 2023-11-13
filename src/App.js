@@ -48,6 +48,10 @@ function App() {
       setRolls(0)
       setTenzies(false)
       setDice(allNewDice())
+      // compare rolls
+      if(rolls < lowestRolls){
+        setLowestRolls(rolls)
+      }
     } else {
       setDice(prevDice => prevDice.map(die => {
         return die.isHeld ? die : generateNewDie()
@@ -73,6 +77,15 @@ function App() {
     }, [dice]
   )
 
+  // highscore
+  const [lowestRolls, setLowestRolls] = React.useState(
+    // lazy state initialization
+    () => localStorage.getItem("lowestRolls") || Infinity
+  )
+  React.useEffect(() => {
+    localStorage.setItem("lowestRolls", lowestRolls)
+  }, [lowestRolls])
+
   return (
     <div className="App">
       <main>
@@ -88,7 +101,7 @@ function App() {
           <p>{rolls} Rolls</p>
         </div>
         <Stopwatch start={!tenzies} />
-        <p>{tenzies ? "true" : "false"}</p>
+        <p>Lowest number of rolls: {lowestRolls}</p>
       </main>
     </div>
   );
