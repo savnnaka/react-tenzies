@@ -88,6 +88,7 @@ function App() {
           <p>{rolls} Rolls</p>
         </div>
         <Stopwatch start={!tenzies} />
+        <p>{tenzies ? "true" : "false"}</p>
       </main>
     </div>
   );
