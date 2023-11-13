@@ -2,6 +2,7 @@ import React from "react";
 import Die from "./components/Die";
 import { nanoid } from 'nanoid'
 import Confetti from "react-confetti"
+import Stopwatch from "./components/Stopwatch";
 
 function App() {
 
@@ -85,8 +86,8 @@ function App() {
         <button className="roll-button" onClick={rollDice}> {tenzies ? "New Game" : "Roll"}</button>
         <div>
           <p>{rolls} Rolls</p>
-          <p>Time: </p>
         </div>
+        <Stopwatch start={!tenzies} />
       </main>
     </div>
   );
